@@ -1,9 +1,3 @@
-//Készíts egy olyan Java kódot, amely egy, a felhasználó által megadott, 1 és 99999 közötti természetes számot képes kiírni betűvel! 2000-ig minden számot egybeírunk, 2000 fölött az ezres és ezer alatti rész közé kötőjelet kell tenni. 
-//Példák: 625: hatszazhuszonot 
-//44: negyvennegy 
-//1975: ezerkilencszazhetvenot 
-//8000: nyolcezer 
-//23470: huszonharomezer-nyolcszazhetven 
 package szamkiiras;
 
 import java.util.Scanner;
@@ -31,18 +25,23 @@ public class SzamKiiras {
     private static void szamSzoveggeAlakitas() {
         egyes(String.valueOf(szam % 10));
         tizes(String.valueOf(szam % 100 / 10));
-        if (szam >= 100) {
+        if (szam >= 100 && !(szam % 1000 == 0)) {
             szoveg = "szaz" + szoveg;
         }
         if (!(szam % 1000 / 100 == 1)) {
             egyes(String.valueOf(szam % 1000 / 100));
         }
         if (szam >= 1000) {
+            if (szam % 10000 / 1000 > 2 && !(szam % 10 == 0 && szam % 100 == 0)) {
+                szoveg = "-" + szoveg;
+            }
             szoveg = "ezer" + szoveg;
+
         }
         if (!(szam % 10000 / 1000 == 1)) {
             egyes(String.valueOf(szam % 10000 / 1000));
         }
+        tizes(String.valueOf(szam % 100000 / 10000));
 
     }
 
@@ -99,7 +98,7 @@ public class SzamKiiras {
                 "";
         };
 
-        if (("2".equals(s) || "1".equals(s)) && (!"0".equals(String.valueOf(szam % 10)))) {
+        if (("2".equals(s) || "1".equals(s)) && (!"0".equals(s))) {
             if ("2".equals(s)) {
                 tizesSzoveg += "on";
             }
