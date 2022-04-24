@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 public class SzamKiiras {
 
-    static Scanner sc = new Scanner(System.in);
     static int szam;
     static String szoveg = "";
 
@@ -15,22 +14,27 @@ public class SzamKiiras {
     }
 
     private static void szamBeker() {
+        Scanner sc = new Scanner(System.in);
         do {
             System.out.print("Kérek egy számot 1 és 99999 között: ");
             szam = sc.nextInt();
+            //assert (szam >= 1 && szam <= 99999) : "A szám nem az intervallumon belül van."; nemjó valamiért :(
         } while (!(szam <= 99999 && szam >= 1));
-        //assert (szam >= 1 && szam <= 99999) : "A szám nem az intervallumon belül van."; nemjó valamiért :(
     }
 
     private static void szamSzoveggeAlakitas() {
+        //egyes
         egyes(String.valueOf(szam % 10));
+        //tizes
         tizes(String.valueOf(szam % 100 / 10));
+        //szazas
         if (szam >= 100 && !(szam % 1000 == 0)) {
             szoveg = "szaz" + szoveg;
         }
         if (!(szam % 1000 / 100 == 1)) {
             egyes(String.valueOf(szam % 1000 / 100));
         }
+        //ezres
         if (szam >= 1000) {
             if (szam % 10000 / 1000 > 2 && !(szam % 10 == 0 && szam % 100 == 0)) {
                 szoveg = "-" + szoveg;
@@ -38,6 +42,7 @@ public class SzamKiiras {
             szoveg = "ezer" + szoveg;
 
         }
+        //tizezres
         if (!(szam % 10000 / 1000 == 1)) {
             egyes(String.valueOf(szam % 10000 / 1000));
         }
