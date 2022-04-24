@@ -36,7 +36,7 @@ public class SzamKiiras {
         }
         //ezres
         if (szam >= 1000) {
-            if (szam % 10000 / 1000 > 2 && !(szam % 10 == 0 && szam % 100 == 0)) {
+            if ((szam % 10000 / 1000 > 2 || szam >=10000)&& !(szam % 1000 == 0)) {
                 szoveg = "-" + szoveg;
             }
             szoveg = "ezer" + szoveg;
@@ -44,6 +44,8 @@ public class SzamKiiras {
         }
         //tizezres
         if (!(szam % 10000 / 1000 == 1)) {
+            egyes(String.valueOf(szam % 10000 / 1000));
+        }else if(szam % 10000 / 1000 == 1 && szam % 100000 / 10000 !=0){            
             egyes(String.valueOf(szam % 10000 / 1000));
         }
         tizes(String.valueOf(szam % 100000 / 10000));
@@ -103,7 +105,7 @@ public class SzamKiiras {
                 "";
         };
 
-        if (("2".equals(s) || "1".equals(s)) && (!"0".equals(s))) {
+        if (("2".equals(s) || "1".equals(s)) && szam % 10 != 0) {
             if ("2".equals(s)) {
                 tizesSzoveg += "on";
             }
