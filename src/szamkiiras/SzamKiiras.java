@@ -29,14 +29,26 @@ public class SzamKiiras {
     }
 
     private static void szamSzoveggeAlakitas() {
-        tizes();
-        egyes();
+        egyes(String.valueOf(szam % 10));
+        tizes(String.valueOf(szam % 100 / 10));
+        if (szam >= 100) {
+            szoveg = "szaz" + szoveg;
+        }
+        if (!(szam % 1000 / 100 == 1)) {
+            egyes(String.valueOf(szam % 1000 / 100));
+        }
+        if (szam >= 1000) {
+            szoveg = "ezer" + szoveg;
+        }
+        if (!(szam % 10000 / 1000 == 1)) {
+            egyes(String.valueOf(szam % 10000 / 1000));
+        }
 
     }
 
-    private static void egyes() {
-        String s = String.valueOf(szam % 10);
-        szoveg += switch (s) {
+    private static void egyes(String s) {
+        String egyesSzoveg = "";
+        egyesSzoveg = switch (s) {
             case "1" ->
                 "egy";
             case "2" ->
@@ -58,11 +70,13 @@ public class SzamKiiras {
             default ->
                 "";
         };
+
+        szoveg = egyesSzoveg + szoveg;
     }
 
-    private static void tizes() {
-        String s = String.valueOf(szam % 100 / 10);
-        szoveg += switch (s) {
+    private static void tizes(String s) {
+        String tizesSzoveg = "";
+        tizesSzoveg = switch (s) {
             case "1" ->
                 "tiz";
             case "2" ->
@@ -84,14 +98,16 @@ public class SzamKiiras {
             default ->
                 "";
         };
+
         if (("2".equals(s) || "1".equals(s)) && (!"0".equals(String.valueOf(szam % 10)))) {
             if ("2".equals(s)) {
-                szoveg += "on";
+                tizesSzoveg += "on";
             }
             if ("1".equals(s)) {
-                szoveg += "en";
+                tizesSzoveg += "en";
             }
         }
+        szoveg = tizesSzoveg + szoveg;
     }
 
     private static void szamKiir() {
